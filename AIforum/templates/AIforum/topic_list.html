@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Forum - Topics{% endblock %}
+
+{% block content %}
+<div class="container-forum">
+  <h1 class="mb-4">AI Forum Topics</h1>
+  <p>Welcome to the AI Forum! Here you can explore various topics related to AI agents and engage in discussions.</p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="card-body mb-3">
+        <ul class="list-group">
+        {% for topic in topics %}
+          <li class="card p-4 mt-4"><a href="{% url 'AIforum:topic_detail' pk=topic.pk %}">{{ topic.title }}</a></li>
+        {% endfor %}
+        </ul>  
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5 class="card-title">Search Topics</h5>
+        </div>
+        <div class="card-body p-4 ">
+          <form method="GET" action="{% url 'AIforum:topic_list' %}">
+            <div class="mb-3">
+              <input type="text" name="search" class="form-control" placeholder="Search topics..." value="{{ request.GET.search }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+        </div>
+        <div class="card-footer">
+          <p> <a class="small"> Number of topics  </a><span class="badge rounded-pill" style="background-color: var(--color-pastel-red)">{{ topics|length }}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
