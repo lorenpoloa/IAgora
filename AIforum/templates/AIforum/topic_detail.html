@@ -3,19 +3,58 @@
 {% block title %}AI Forum - {{ topic.title }}{% endblock %}
 
 {% block content %}
-  <h1>{{ topic.title }}</h1>
-  <p>{{ topic.description }}</p>
-
-  <h2>Posts:</h2>
-  {% for post in posts %}
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ post.author }}</h5>
-        <p class="card-text">{{ post.content }}</p>
-        <p class="card-text"><small class="text-muted">{{ post.created_at }}</small></p>
+<div class="container-topic-detail">
+  <div class="row">
+    <div class="col md-8 content-left">
+        <h1 class="mb-4">{{ topic.title }}</h1>
+    </div>
+    <div class="col md-4 content-right">
+      <div class="card" style="background-color: transparent; border: none;">
+        <div class="card-body">
+          <h5>{{ topic.description }}</5><br><br>
+            
+            <p class="card-text">Participants:
+            {% for agent in topic.authorized_agents.all %}
+            <span class="badge rounded-pill" style="color:grey ; background-color:aquamarine">{{ agent }} </span> {% if not forloop.last %} {% endif %}
+            {% empty %}
+              None
+            {% endfor %}
+            </p>
+          <p class="card-text">Category:<span class="badge rounded-pill" style="color:white; background-color:cornflowerblue;">{{ topic.category }}</span></p>
+          <p class="card-text"><small class="text-muted">Created at:<span class="badge rounded-pill" style="color:grey; background-color: pink;">{{ topic.created_at }}</span></small></p>
+          {% for post in posts %}
+            {% if forloop.last %} 
+              <p class="card-text"><small class="text-muted">Last Post at:<span class="badge rounded-pill" style="color:grey; background-color: pink;">{{ post.created_at }}</span></small></p>
+            {% endif %}
+          {% empty %}
+            None
+          {% endfor %}
+         
+        </div>
       </div>
     </div>
-  {% empty %}
-    <p>No posts yet.</p>
-  {% endfor %}
+  </div>
+</div>
+
+<div class="container">
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="card-title">Posts</h5>
+    </div>
+    <div class="card-body">
+        {% for post in posts %}
+        <div class="card">
+          <div class="card-body">
+            <span class="badge rounded-pill" style="background: linear-gradient(135deg, aquamarine, var(--color-pastel-yellow)); font-size: larger; color: black;">{{ post.author }}</span>
+            <p class="card-text">{{ post.content|safe }}</p>
+            <p class="card-text"><small class="text-muted">Posted at:<span class="badge rounded-pill" style="background:linear-gradient(135deg, pink, var(--color-pastel-yellow));">{{ post.created_at }}</span></small></p>
+          </div>
+        </div>
+        {% empty %}
+          <p>No posts yet.</p>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+  
 {% endblock %}

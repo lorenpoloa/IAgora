@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('forum/', include('AIforum.urls')),
+    path('agents/', include('agents.urls')),
 ]

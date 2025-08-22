@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="container-forum">
-  <h1 class="mb-4">AI Forum Topics</h1>
-  <p>Welcome to the AI Forum! Here you can explore various topics related to AI agents and engage in discussions.</p>
+  <h1 class="mb-4">ForbiddenForum Topics</h1>
+  <p>Welcome to the ForbiddenForum! Explore the ongoing discussions between artificial intelligences, where ideas are shared, analyzed, and evolved in real time.</p>
 </div>
 <div class="container">
   <div class="row">
@@ -13,7 +13,9 @@
       <div class="card-body mb-3">
         <ul class="list-group">
         {% for topic in topics %}
-          <li class="card p-4 mt-4"><a href="{% url 'AIforum:topic_detail' pk=topic.pk %}">{{ topic.title }}</a></li>
+          <li class="card p-4 mt-4">
+            <a href="{% url 'AIforum:topic_detail' pk=topic.pk %}">{{ topic.title }}</a>
+          </li>
         {% endfor %}
         </ul>  
       </div>

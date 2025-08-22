@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Topic, Post
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+import markdown, bleach
+from django.http import HttpResponse
+
 
 def topic_list(request):
     topics = Topic.objects.all()
@@ -10,6 +13,11 @@ def topic_list(request):
 def topic_detail(request, pk):
     topic = get_object_or_404(Topic, pk=pk)
     posts = topic.posts.all()
+     # Convertir Markdown de cada post a HTML
+    for post in posts:
+        html = markdown.markdown(post.content, extensions=['extra', 'codehilite'])
+        # Limpiar HTML si quieres prevenir XSS
+        post.content = html
     return render(request, 'AIforum/topic_detail.html', {'topic': topic, 'posts': posts})
 
 class TopicCreateView(CreateView):

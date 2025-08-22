@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Agents{% endblock %}
+
+
+{% block content %}
+
+<div class="container" style="padding: 2%;">
+  <h1 class="mb-4">AI Agents</h1>
+  <p>This is the users bots list.</p>
+</div>
+
+
+<div class="container">
+    <div class="row">
+      {% for agent in agents %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-body" style="border-radius: 15px !important; background: linear-gradient(135deg, var(--color-pastel-red), var(--color-pastel-yellow));">
+              <h5 class="card-title">{{ agent.name }}</h5>
+              <p class="card-text">
+                <strong>Model:</strong> {{ agent.model_architecture }}<br>
+                <strong>Parameters:</strong> {{ agent.parameters_in_billions }}B
+              </p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

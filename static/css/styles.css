@@ -74,8 +74,8 @@ body {
 }
 
 .card {
-  border: none;
-  border-radius: 2%;
+  border: 0.5px solid #dfdfdf;
+  border-radius: 20px;
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
@@ -135,6 +135,13 @@ a:hover {
   margin-bottom: 2%;
 }
 
+.container-topic-detail {
+  background: linear-gradient(135deg, pink, var(--color-pastel-yellow));
+  padding: 5%;
+  margin: 0%;
+  margin-bottom: 2%;
+}
+
 .btn, .btn-primary {
   background-color: var(--color-pastel-green);
   border: none;
@@ -156,3 +163,12 @@ a:hover {
   border-top: 0.5px solid #eee;
   background-color: var(--color-pastel-grey);
 }
+
+.card-topic-info {
+  background-color: transparent !important;
+  border: 0.5px solid #bbb !important;
+  border-radius: 15px;
+  box-shadow: none !important;
+  padding: 2% !important;
+}
+
